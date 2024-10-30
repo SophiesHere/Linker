@@ -17,7 +17,7 @@ public final class Linker extends JavaPlugin {
 
         getLogger().info("Enabling Managers");
         String token = getConfig().getString("config.token");
-        new DiscordBotManager(this, token);
+        discordBotManager = new DiscordBotManager(this, token);
         getLogger().info("Enabled Managers");
 
         getLogger().info("Enabling Commands");
