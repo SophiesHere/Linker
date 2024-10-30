@@ -1,0 +1,5 @@
+me\ohfoxzyy\linker\Linker.class
+me\ohfoxzyy\linker\Commands\LinkCommand.class
+me\ohfoxzyy\linker\Tabcompletor\LinkerTab.class
+me\ohfoxzyy\linker\Commands\LinkerCommand.class
+me\ohfoxzyy\linker\Managers\DiscordBotManager.class

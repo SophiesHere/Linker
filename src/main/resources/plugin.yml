@@ -1,0 +1,15 @@
+name: Linker
+version: '1.0-SNAPSHOT'
+main: me.ohfoxzyy.linker.Linker
+api-version: '1.20'
+prefix: Linker
+load: STARTUP
+authors: [sophieshere, ohfoxzyy, SkRelax]
+description: Linker for Discord & Minecraft
+commands:
+  link:
+    description: Link command
+  linker:
+    description: Main command
+    permission: linker.linker
+    permission-message: You don't have the required permissions to do this!
