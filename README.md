@@ -1,6 +1,6 @@
 # Minecraft Account Linker Plugin
 
-A Minecraft plugin for version **1.20.6** that allows players to link their in-game accounts with their Discord accounts. This plugin simplifies community management by connecting player information to Discord, enhancing both in-game and community interactions.
+A Minecraft plugin for version **1.18.2+** that allows players to link their in-game accounts with their Discord accounts. This plugin simplifies community management by connecting player information to Discord, enhancing both in-game and community interactions.
 
 ## Features
 
@@ -17,6 +17,7 @@ A Minecraft plugin for version **1.20.6** that allows players to link their in-g
 ## Configuration
 
 - **config.yml**: Stores the Discord bot token and other general settings.
+- **messages.yml**: Stores all messages, supports color code
 - **linked_accounts.yml**: Stores information about linked accounts.
 
 ## Commands & Permissions
@@ -25,21 +26,21 @@ A Minecraft plugin for version **1.20.6** that allows players to link their in-g
 
 - **/link**
   - Links a player’s Minecraft account to their Discord account.
-  - **Permission**: `linker.link`
+  - **Permission**: `linker.command.link`
 
 ### Admin Commands
 
 - **/linker**
   - General command for plugin management.
-  - **Permission**: `linker.linker`
+  - **Permission**: `linker.command.linker`
 
 - **/linker version**
   - Displays the current plugin version.
-  - **Permission**: `linker.linker`
+  - **Permission**: `linker.command.linker`
 
 - **/linker reload**
   - Reloads the plugin and restarts the Discord bot to apply changes.
-  - **Permission**: `linker.linker`
+  - **Permission**: `linker.command.linker`
 
 ## Permissions
 
