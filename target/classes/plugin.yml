@@ -1,7 +1,7 @@
 name: Linker
-version: '1.0-SNAPSHOT'
+version: '1.1-BUILD'
 main: me.ohfoxzyy.linker.Linker
-api-version: '1.20'
+api-version: '1.18'
 prefix: Linker
 load: STARTUP
 authors: [sophieshere, ohfoxzyy, SkRelax]
@@ -9,7 +9,9 @@ description: Linker for Discord & Minecraft
 commands:
   link:
     description: Link command
+    permission: linker.command.link
+    permission-message: You don't have the required permissions to do this!
   linker:
     description: Main command
-    permission: linker.linker
+    permission: linker.command.linker
     permission-message: You don't have the required permissions to do this!

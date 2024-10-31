@@ -1,0 +1,40 @@
+# Messages related to linking a player's account in minecraft
+minecraft:
+  # If the player is already linked
+  already-linked: "&cYou are already linked to Discord!"
+
+  # Gets the link code
+  link-code1: "&eYour link code is: &6{code}"
+  link-code2: "&ePlease use this code to link your account."
+
+  # Only players can use the command
+  only-player: "&cThis command can only be executed by players."
+
+  # Upon reload
+  reload: "&aReloaded config, all messages and discord bot has restarted!"
+
+# Messages related to linking a player's account in discord
+discord:
+  # When the account has been successfully linked
+  link-success: "&aYour Minecraft account has been successfully linked!"
+
+  # When the account has been unsuccessfully linked
+  link-failure: "&cInvalid or expired code. Please try again."
+
+  # When the discord bot receives the code from a player.
+  link-received: "&eReceived /link command with code: {code} from user: {user}."
+
+  # When the link code is invalid.
+  link-invalid: "&cFailed to link account: Invalid or expired code provided."
+
+  # When the code is successfully generated.
+  code-generated: "&eGenerated link code: {code} for player UUID: {uuid}."
+
+  # When the account is successfully linked
+  account-saved: "&eSaved linked account: {discordId} for player UUID: {uuid}."
+
+  # When the bot is disabled
+  bot-shutdown: "&eDiscord bot has been shut down."
+
+  # When the bot has not been successfully initialized
+  loading-error: "&cError initializing Discord bot."

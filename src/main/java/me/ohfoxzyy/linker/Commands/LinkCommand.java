@@ -1,7 +1,7 @@
 package me.ohfoxzyy.linker.Commands;
 
 import me.ohfoxzyy.linker.Managers.DiscordBotManager;
-import org.bukkit.ChatColor;
+import me.ohfoxzyy.linker.Managers.MessageManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,23 +14,32 @@ public class LinkCommand implements CommandExecutor {
         this.discordBotManager = discordBotManager;
     }
 
+    public void setDiscordBotManager(DiscordBotManager discordBotManager) {
+        this.discordBotManager = discordBotManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
             if (discordBotManager.isPlayerLinked(player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "Your account is already linked to Discord.");
+                String alreadyLinked = MessageManager.getInstance().getMessage("minecraft.already-linked");
+                player.sendMessage(alreadyLinked);
                 return true;
             }
 
             String linkCode = discordBotManager.generateLinkCode(player.getUniqueId());
-            player.sendMessage(ChatColor.YELLOW + "Your link code is: " + ChatColor.GOLD + linkCode);
-            player.sendMessage(ChatColor.YELLOW + "Use this code in the Discord server to link your account!");
+            String linkMessage1 = MessageManager.getInstance().getMessage("minecraft.link-code1").replace("{code}", linkCode);
+            player.sendMessage(linkMessage1);
+
+            String linkMessage2 = MessageManager.getInstance().getMessage("minecraft.link-code2");
+            player.sendMessage(linkMessage2);
 
             return true;
         } else {
-            sender.sendMessage(ChatColor.RED + "This command can only be used by players.");
+            String onlyPlayers = MessageManager.getInstance().getMessage("minecraft.only-player", sender.getName());
+            sender.sendMessage(onlyPlayers);
             return false;
         }
     }

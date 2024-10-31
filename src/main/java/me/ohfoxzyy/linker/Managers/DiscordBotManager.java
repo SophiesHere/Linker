@@ -25,8 +25,9 @@ public class DiscordBotManager extends ListenerAdapter {
     private FileConfiguration linkedAccountsConfig;
     private File linkedAccountsFile;
 
-    public DiscordBotManager(JavaPlugin plugin, String token) {
+    public DiscordBotManager(JavaPlugin plugin) {
         try {
+            String token = plugin.getConfig().getString("config.token");
             jda = JDABuilder.createDefault(token).build();
             jda.addEventListener(this);
 
@@ -44,7 +45,8 @@ public class DiscordBotManager extends ListenerAdapter {
             LOGGER.info("Linked accounts configuration loaded successfully.");
 
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error initializing Discord bot", e);
+            String errorMessage = MessageManager.getInstance().getMessage("discord.loading-error");
+            LOGGER.log(Level.SEVERE, errorMessage, e);
         }
     }
 
@@ -52,25 +54,28 @@ public class DiscordBotManager extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (event.getName().equals("link")) {
             String code = event.getOption("code").getAsString();
-            LOGGER.info("Received /link command with code: " + code + " from user: " + event.getUser ().getId());
+            String receivedMessage = MessageManager.getInstance().getMessage("discord.link-received", "{code}", code, "{user}", event.getUser().getId());
+            LOGGER.info(receivedMessage);
 
             UUID playerUUID = pendingLinks.get(code);
             if (playerUUID != null) {
-                String discordId = event.getUser ().getId();
+                String discordId = event.getUser().getId();
                 saveLinkedAccount(playerUUID, discordId);
 
-                event.reply("Your Minecraft account has been successfully linked!").queue();
+                String successMessage = MessageManager.getInstance().getMessage("discord.link-success");
+                event.reply(successMessage).queue();
                 LOGGER.info("Linked Discord account " + discordId + " with player UUID: " + playerUUID);
 
                 Player player = Bukkit.getPlayer(playerUUID);
                 if (player != null) {
-                    player.sendMessage("Your Discord account has been successfully linked!");
+                    player.sendMessage(successMessage);
                 }
 
                 pendingLinks.remove(code);
             } else {
-                event.reply("Invalid or expired code.").queue();
-                LOGGER.warning("Failed to link account: Invalid or expired code provided.");
+                String errorMessage = MessageManager.getInstance().getMessage("discord.link-failure");
+                event.reply(errorMessage).queue();
+                LOGGER.warning(MessageManager.getInstance().getMessage("discord.link-invalid"));
             }
         }
     }
@@ -78,7 +83,8 @@ public class DiscordBotManager extends ListenerAdapter {
     public String generateLinkCode(UUID playerUUID) {
         String code = String.valueOf((int) (Math.random() * 900000) + 100000);
         pendingLinks.put(code, playerUUID);
-        LOGGER.info("Generated link code: " + code + " for player UUID: " + playerUUID);
+        String logMessage = MessageManager.getInstance().getMessage("discord.code-generated", "{code}", code, "{uuid}", playerUUID.toString());
+        LOGGER.info(logMessage);
         return code;
     }
 
@@ -90,7 +96,8 @@ public class DiscordBotManager extends ListenerAdapter {
         linkedAccountsConfig.set(playerUUID.toString(), discordId);
         try {
             linkedAccountsConfig.save(linkedAccountsFile);
-            LOGGER.info("Saved linked account: " + discordId + " for player UUID: " + playerUUID);
+            String savedMessage = MessageManager.getInstance().getMessage("discord.account-saved", "{discordId}", discordId, "{uuid}", playerUUID.toString());
+            LOGGER.info(savedMessage);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error saving linked account for player UUID: " + playerUUID, e);
         }
@@ -99,7 +106,7 @@ public class DiscordBotManager extends ListenerAdapter {
     public void shutdown() {
         if (jda != null) {
             jda.shutdown();
-            LOGGER.info("Discord bot has been shut down.");
+            LOGGER.info(MessageManager.getInstance().getMessage("discord.bot-shutdown"));
         }
     }
 }

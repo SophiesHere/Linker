@@ -1,2 +1,5 @@
 config:
+  # The token must be added, otherwise it WON'T work. Create one here.
+  # https://discord.com/developers/applications
+  # Also make sure that your discord bot has the right permissions and intents enabled.
   token: 'YOUR_DISCORD_BOT_TOKEN_HERE'
