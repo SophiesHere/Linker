@@ -1,11 +1,15 @@
 package me.ohfoxzyy.linker.Managers;
 
+import me.ohfoxzyy.linker.Listeners.DiscordListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -13,7 +17,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +30,38 @@ public class DiscordBotManager extends ListenerAdapter {
     private HashMap<String, UUID> pendingLinks = new HashMap<>();
     private FileConfiguration linkedAccountsConfig;
     private File linkedAccountsFile;
+    private final Map<TextChannel, BridgeConfig> bridgeChannels = new HashMap<>();
+    private DiscordListener discordListener;
 
     public DiscordBotManager(JavaPlugin plugin) {
         try {
             String token = plugin.getConfig().getString("config.token");
+<<<<<<< Updated upstream
             jda = JDABuilder.createDefault(token).build();
             jda.addEventListener(this);
+=======
+
+            if (token == null || token.isEmpty()) {
+                throw new IllegalArgumentException("Discord bot token is not set in the config!");
+            }
+
+            jda = JDABuilder.createDefault(token)
+                    .enableIntents(EnumSet.of(
+                            GatewayIntent.GUILD_MESSAGES,
+                            GatewayIntent.MESSAGE_CONTENT
+                    ))
+                    .addEventListeners(new DiscordListener(bridgeChannels))
+                    .build();
+
+            try {
+                jda.awaitReady();
+                LOGGER.info("Discord bot is fully initialized and ready!");
+            } catch (InterruptedException e) {
+                LOGGER.severe("Failed to initialize Discord bot: " + e.getMessage());
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Discord bot initialization interrupted", e);
+            }
+>>>>>>> Stashed changes
 
             jda.updateCommands()
                     .addCommands(Commands.slash("link", "Link your Minecraft account")
@@ -42,12 +74,61 @@ public class DiscordBotManager extends ListenerAdapter {
                 plugin.saveResource("linked_accounts.yml", false);
             }
             linkedAccountsConfig = YamlConfiguration.loadConfiguration(linkedAccountsFile);
-            LOGGER.info("Linked accounts configuration loaded successfully.");
+            LOGGER.info(MessageManager.getInstance().getMessage("discord.account-saved", "{file}", linkedAccountsFile.getName()));
+
+            loadBridgeConfigurations(plugin);
 
         } catch (Exception e) {
             String errorMessage = MessageManager.getInstance().getMessage("discord.loading-error");
             LOGGER.log(Level.SEVERE, errorMessage, e);
         }
+    }
+
+    public void reload(JavaPlugin plugin) {
+        loadBridgeConfigurations(plugin);
+        discordListener.reload(bridgeChannels);
+    }
+
+    public void loadBridgeConfigurations(JavaPlugin plugin) {
+        // Retrieve the bridge section from the configuration
+        ConfigurationSection bridgeSection = plugin.getConfig().getConfigurationSection("bridge");
+
+        if (bridgeSection != null) {
+            // Clear any existing bridge channels
+            bridgeChannels.clear();
+
+            // Iterate over all keys in the bridge section
+            for (String key : bridgeSection.getKeys(false)) {
+                // Retrieve the configuration section for each channel
+                ConfigurationSection channelConfig = bridgeSection.getConfigurationSection(key);
+                if (channelConfig == null) {
+                    LOGGER.warning("Configuration for bridge channel " + key + " is missing or invalid.");
+                    continue;
+                }
+
+                // Retrieve configuration values, using default values where necessary
+                String channelId = channelConfig.getString("channel-id");
+                String discordRole = channelConfig.getString("discord-role", "");  // Default to empty string if missing
+                String minecraftPermission = channelConfig.getString("minecraft-permission", ""); // Default to empty string if missing
+
+                String minecraftPrefix = channelConfig.getString("prefix.minecraft", "**{name}**: *{message}*");
+                String discordPrefix = channelConfig.getString("prefix.discord", "&b&l{name}:&f {message}");
+
+                TextChannel discordChannel = jda.getTextChannelById(channelId);
+                if (discordChannel != null) {
+                    bridgeChannels.put(discordChannel, new BridgeConfig(discordRole, minecraftPermission, minecraftPrefix, discordPrefix));
+                    LOGGER.info("Bridge for channel " + channelId + " loaded successfully.");
+                } else {
+                    LOGGER.warning("Channel ID " + channelId + " not found, disabling bridge: " + key);
+                }
+            }
+        } else {
+            LOGGER.warning("No bridge configuration found in the config.");
+        }
+    }
+
+    public Map<TextChannel, BridgeConfig> getBridgeChannels() {
+        return bridgeChannels;
     }
 
     @Override
@@ -81,12 +162,20 @@ public class DiscordBotManager extends ListenerAdapter {
     }
 
     public String generateLinkCode(UUID playerUUID) {
+        if (isPlayerLinked(playerUUID)) {
+            return MessageManager.getInstance().getMessage("discord.already-linked");
+        }
+
         String code = String.valueOf((int) (Math.random() * 900000) + 100000);
         pendingLinks.put(code, playerUUID);
+<<<<<<< Updated upstream
         String logMessage = MessageManager.getInstance().getMessage("discord.code-generated", "{code}", code, "{uuid}", playerUUID.toString());
         LOGGER.info(logMessage);
+=======
+>>>>>>> Stashed changes
         return code;
     }
+
 
     public boolean isPlayerLinked(UUID playerUUID) {
         return linkedAccountsConfig.contains(playerUUID.toString());
@@ -108,5 +197,7 @@ public class DiscordBotManager extends ListenerAdapter {
             jda.shutdown();
             LOGGER.info(MessageManager.getInstance().getMessage("discord.bot-shutdown"));
         }
+        pendingLinks.clear();
+        bridgeChannels.clear();
     }
 }

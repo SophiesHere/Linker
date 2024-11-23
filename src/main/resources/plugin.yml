@@ -1,5 +1,9 @@
 name: Linker
+<<<<<<< Updated upstream
 version: '1.1-BUILD'
+=======
+version: '1.2.1'
+>>>>>>> Stashed changes
 main: me.ohfoxzyy.linker.Linker
 api-version: '1.18'
 prefix: Linker

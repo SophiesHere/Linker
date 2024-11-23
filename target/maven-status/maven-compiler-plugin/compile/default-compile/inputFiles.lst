@@ -1,6 +1,9 @@
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Commands\LinkCommand.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Commands\LinkerCommand.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Linker.java
+C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Listeners\ChatListener.java
+C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Listeners\DiscordListener.java
+C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\BridgeConfig.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\DiscordBotManager.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\MessageManager.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\Metrics.java

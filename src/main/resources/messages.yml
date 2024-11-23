@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # Messages related to linking a player's account in minecraft
+=======
+# Messages related to linking a player's account in Minecraft
+>>>>>>> Stashed changes
 minecraft:
   # If the player is already linked
   already-linked: "&cYou are already linked to Discord!"
@@ -11,9 +15,15 @@ minecraft:
   only-player: "&cThis command can only be executed by players."
 
   # Upon reload
+<<<<<<< Updated upstream
   reload: "&aReloaded config, all messages and discord bot has restarted!"
 
 # Messages related to linking a player's account in discord
+=======
+  reload: "&aReloaded config, all messages, and Discord bot has restarted!"
+
+# Messages related to linking a player's account in Discord, and bridges
+>>>>>>> Stashed changes
 discord:
   # When the account has been successfully linked
   link-success: "&aYour Minecraft account has been successfully linked!"
@@ -21,7 +31,11 @@ discord:
   # When the account has been unsuccessfully linked
   link-failure: "&cInvalid or expired code. Please try again."
 
+<<<<<<< Updated upstream
   # When the discord bot receives the code from a player.
+=======
+  # When the Discord bot receives the code from a player.
+>>>>>>> Stashed changes
   link-received: "&eReceived /link command with code: {code} from user: {user}."
 
   # When the link code is invalid.
@@ -37,4 +51,20 @@ discord:
   bot-shutdown: "&eDiscord bot has been shut down."
 
   # When the bot has not been successfully initialized
+<<<<<<< Updated upstream
   loading-error: "&cError initializing Discord bot."
+=======
+  loading-error: "&cError initializing Discord bot."
+
+  # When the Discord bot token is missing
+  token-missing: "&cDiscord bot token not found. Disabling the bot."
+
+  # When a bridge channel ID is missing
+  channel-id-missing: "&cChannel ID not found for bridge: {bridge}. Disabling the bridge."
+
+  # When a bridge channel ID is invalid
+  channel-id-invalid: "&cChannel ID {channelId} not found. Disabling the bridge: {bridge}."
+
+  # When a bridge is loaded successfully
+  bridge-loaded: "&aBridge '{bridge}' loaded successfully with Channel ID: {channelId}."
+>>>>>>> Stashed changes

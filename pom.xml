@@ -6,10 +6,14 @@
 
     <groupId>me.ohfoxzyy</groupId>
     <artifactId>linker</artifactId>
+<<<<<<< Updated upstream
     <version>1.1-BUILD</version>
+=======
+    <version>1.2.1</version>
+>>>>>>> Stashed changes
     <packaging>jar</packaging>
 
-    <name>linker</name>
+    <name>Linker</name>
 
     <properties>
         <java.version>17</java.version>
@@ -73,6 +77,11 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>5.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,5 +1,62 @@
 config:
+<<<<<<< Updated upstream
   # The token must be added, otherwise it WON'T work. Create one here.
   # https://discord.com/developers/applications
   # Also make sure that your discord bot has the right permissions and intents enabled.
   token: 'YOUR_DISCORD_BOT_TOKEN_HERE'
+=======
+  # The Discord bot token is required for the plugin to function.
+  # Create a bot application here: https://discord.com/developers/applications
+  # After creating the bot, copy the token and paste it below.
+  # Make sure the bot has appropriate permissions and intents enabled in the Discord Developer Portal.
+  token: ''
+
+bridge:
+  # Global setting to check permissions for messages sent between Minecraft and Discord.
+  # If set to true:
+  # - Only Discord users with the specified "discord-role" can send messages to Minecraft.
+  # - Only Minecraft players with the specified "minecraft-permission" can send messages to Discord.
+  # Set to false to disable these checks.
+  check-permissions: true
+
+  # Define individual chat bridges. Each bridge connects a Minecraft chat context with a Discord channel.
+  chat1:
+    # Discord channel ID for this chat bridge. Replace with the actual channel ID from Discord.
+    channel-id: '123456789012345678'  # Example ID; replace with your own.
+
+    # Discord role name required to send messages to Minecraft from this Discord channel.
+    # If left empty, all users in the Discord channel can send messages to Minecraft.
+    discord-role: 'Moderator'
+
+    # Minecraft permission required to send messages to this Discord channel.
+    # If left empty, all Minecraft players can send messages to this Discord channel.
+    minecraft-permission: 'chatbridge.moderator'
+
+    prefix:
+      # Prefix format for messages sent from Minecraft to Discord.
+      # {name} is replaced with the sender's name, and {message} with the content.
+      minecraft: '**{name}**: *{message}*'  # Example: **Player1**: Hello from Minecraft!
+
+      # Prefix format for messages sent from Discord to Minecraft.
+      # {name} is replaced with the sender's Discord username, and {message} with the content.
+      discord: '&b&l{name}:&f {message}'  # Example: Bolded name with colored text.
+
+  chat2:
+    # A second chat bridge. Adjust settings as needed.
+    channel-id: '234567890123456789'  # Replace with the actual channel ID.
+    discord-role: 'Admin'  # Only users with the "Admin" role can send messages from Discord.
+    minecraft-permission: 'chatbridge.admin'  # Only players with this permission can send messages to Discord.
+    prefix:
+      minecraft: '**{name}**: *{message}*'  # Example: Bolded name and italicized message.
+      discord: '&b&l{name}:&f {message}'  # Bolded name with default color formatting.
+
+  chat3:
+    # A third chat bridge with no role or permission restrictions.
+    # Use this for public chats or general communication channels.
+    channel-id: '345678901234567890'  # Replace with the actual channel ID.
+    discord-role: ''  # No role restriction; all Discord users can send messages.
+    minecraft-permission: ''  # No permission restriction; all players can send messages.
+    prefix:
+      minecraft: '**{name}**: *{message}*'  # Example format for Minecraft to Discord messages.
+      discord: '&b&l{name}:&f {message}'  # Example format for Discord to Minecraft messages.
+>>>>>>> Stashed changes
