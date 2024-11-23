@@ -51,12 +51,6 @@ A Minecraft plugin for version **1.18.2+** that allows players to link their in-
 | `/linker version` | Display current plugin version                     | `linker.command.linker`    |
 | `/linker reload`  | Reload plugin and restart Discord bot              | `linker.commmand.linker`   |
 
-### v1.1
-- Same as previous release, but with a messages.yml file to configure all messages being sent. Also, still very basic and lacks alot of 
-- Support for Discord bot integration and account linking.
-
-### v1.0
-- Initial release with `/link` and `/linker` command functionalities, still very basic.
-- Support for Discord bot integration and account linking.
+You can add more permissions in the config.
 
 **Enjoy linking your Minecraft and Discord accounts!**
