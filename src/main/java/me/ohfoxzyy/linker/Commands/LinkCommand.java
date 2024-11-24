@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class LinkCommand implements CommandExecutor {
     private DiscordBotManager discordBotManager;
@@ -19,9 +20,8 @@ public class LinkCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        if (sender instanceof Player player) {
 
             if (discordBotManager.isPlayerLinked(player.getUniqueId())) {
                 String alreadyLinked = MessageManager.getInstance().getMessage("minecraft.already-linked");

@@ -1,5 +1,10 @@
 package me.ohfoxzyy.linker.Managers;
 
+<<<<<<< Updated upstream
+=======
+import me.ohfoxzyy.linker.Linker;
+import me.ohfoxzyy.linker.Listeners.ConsoleListener;
+>>>>>>> Stashed changes
 import me.ohfoxzyy.linker.Listeners.DiscordListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -37,9 +42,12 @@ public class DiscordBotManager extends ListenerAdapter {
         try {
             String token = plugin.getConfig().getString("config.token");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             jda = JDABuilder.createDefault(token).build();
             jda.addEventListener(this);
 =======
+=======
+>>>>>>> Stashed changes
 
             if (token == null || token.isEmpty()) {
                 throw new IllegalArgumentException("Discord bot token is not set in the config!");
@@ -51,6 +59,10 @@ public class DiscordBotManager extends ListenerAdapter {
                             GatewayIntent.MESSAGE_CONTENT
                     ))
                     .addEventListeners(new DiscordListener(bridgeChannels))
+<<<<<<< Updated upstream
+=======
+                    .addEventListeners(this)
+>>>>>>> Stashed changes
                     .build();
 
             try {
@@ -61,6 +73,9 @@ public class DiscordBotManager extends ListenerAdapter {
                 Thread.currentThread().interrupt();
                 throw new RuntimeException("Discord bot initialization interrupted", e);
             }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
             jda.updateCommands()
@@ -77,6 +92,11 @@ public class DiscordBotManager extends ListenerAdapter {
             LOGGER.info(MessageManager.getInstance().getMessage("discord.account-saved", "{file}", linkedAccountsFile.getName()));
 
             loadBridgeConfigurations(plugin);
+<<<<<<< Updated upstream
+=======
+
+            new ConsoleListener(this, Linker.getPlugin());
+>>>>>>> Stashed changes
 
         } catch (Exception e) {
             String errorMessage = MessageManager.getInstance().getMessage("discord.loading-error");
@@ -84,12 +104,17 @@ public class DiscordBotManager extends ListenerAdapter {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public void reload(JavaPlugin plugin) {
         loadBridgeConfigurations(plugin);
         discordListener.reload(bridgeChannels);
     }
 
     public void loadBridgeConfigurations(JavaPlugin plugin) {
+<<<<<<< Updated upstream
         // Retrieve the bridge section from the configuration
         ConfigurationSection bridgeSection = plugin.getConfig().getConfigurationSection("bridge");
 
@@ -100,16 +125,30 @@ public class DiscordBotManager extends ListenerAdapter {
             // Iterate over all keys in the bridge section
             for (String key : bridgeSection.getKeys(false)) {
                 // Retrieve the configuration section for each channel
+=======
+        ConfigurationSection bridgeSection = plugin.getConfig().getConfigurationSection("bridge");
+
+        if (bridgeSection != null) {
+            bridgeChannels.clear();
+
+            for (String key : bridgeSection.getKeys(false)) {
+>>>>>>> Stashed changes
                 ConfigurationSection channelConfig = bridgeSection.getConfigurationSection(key);
                 if (channelConfig == null) {
                     LOGGER.warning("Configuration for bridge channel " + key + " is missing or invalid.");
                     continue;
                 }
 
+<<<<<<< Updated upstream
                 // Retrieve configuration values, using default values where necessary
                 String channelId = channelConfig.getString("channel-id");
                 String discordRole = channelConfig.getString("discord-role", "");  // Default to empty string if missing
                 String minecraftPermission = channelConfig.getString("minecraft-permission", ""); // Default to empty string if missing
+=======
+                String channelId = channelConfig.getString("channel-id");
+                String discordRole = channelConfig.getString("discord-role", "");
+                String minecraftPermission = channelConfig.getString("minecraft-permission", "");
+>>>>>>> Stashed changes
 
                 String minecraftPrefix = channelConfig.getString("prefix.minecraft", "**{name}**: *{message}*");
                 String discordPrefix = channelConfig.getString("prefix.discord", "&b&l{name}:&f {message}");
@@ -134,9 +173,18 @@ public class DiscordBotManager extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (event.getName().equals("link")) {
+            LOGGER.info("Received /link command");
+
+            // Start processing
+            event.deferReply().queue(); // Acknowledge to Discord that we are processing
+
             String code = event.getOption("code").getAsString();
+<<<<<<< Updated upstream
             String receivedMessage = MessageManager.getInstance().getMessage("discord.link-received", "{code}", code, "{user}", event.getUser().getId());
             LOGGER.info(receivedMessage);
+=======
+            LOGGER.info("Processing link code: " + code);
+>>>>>>> Stashed changes
 
             UUID playerUUID = pendingLinks.get(code);
             if (playerUUID != null) {
@@ -144,7 +192,12 @@ public class DiscordBotManager extends ListenerAdapter {
                 saveLinkedAccount(playerUUID, discordId);
 
                 String successMessage = MessageManager.getInstance().getMessage("discord.link-success");
+<<<<<<< Updated upstream
                 event.reply(successMessage).queue();
+=======
+                event.getHook().sendMessage(successMessage).queue();
+
+>>>>>>> Stashed changes
                 LOGGER.info("Linked Discord account " + discordId + " with player UUID: " + playerUUID);
 
                 Player player = Bukkit.getPlayer(playerUUID);
@@ -155,8 +208,14 @@ public class DiscordBotManager extends ListenerAdapter {
                 pendingLinks.remove(code);
             } else {
                 String errorMessage = MessageManager.getInstance().getMessage("discord.link-failure");
+<<<<<<< Updated upstream
                 event.reply(errorMessage).queue();
                 LOGGER.warning(MessageManager.getInstance().getMessage("discord.link-invalid"));
+=======
+                event.getHook().sendMessage(errorMessage).queue();
+
+                LOGGER.warning("Invalid link code: " + code);
+>>>>>>> Stashed changes
             }
         }
     }
@@ -169,8 +228,11 @@ public class DiscordBotManager extends ListenerAdapter {
         String code = String.valueOf((int) (Math.random() * 900000) + 100000);
         pendingLinks.put(code, playerUUID);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         String logMessage = MessageManager.getInstance().getMessage("discord.code-generated", "{code}", code, "{uuid}", playerUUID.toString());
         LOGGER.info(logMessage);
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         return code;

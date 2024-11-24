@@ -4,11 +4,16 @@
   <groupId>me.ohfoxzyy</groupId>
   <artifactId>linker</artifactId>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <name>linker</name>
   <version>1.1-BUILD</version>
 =======
   <name>Linker</name>
   <version>1.2.1</version>
+>>>>>>> Stashed changes
+=======
+  <name>Linker</name>
+  <version>1.2.2</version>
 >>>>>>> Stashed changes
   <build>
     <defaultGoal>clean package</defaultGoal>

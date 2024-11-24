@@ -7,9 +7,13 @@
     <groupId>me.ohfoxzyy</groupId>
     <artifactId>linker</artifactId>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <version>1.1-BUILD</version>
 =======
     <version>1.2.1</version>
+>>>>>>> Stashed changes
+=======
+    <version>1.2.2</version>
 >>>>>>> Stashed changes
     <packaging>jar</packaging>
 

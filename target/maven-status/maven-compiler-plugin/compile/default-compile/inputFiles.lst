@@ -2,6 +2,10 @@ C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Commands\LinkCo
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Commands\LinkerCommand.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Linker.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Listeners\ChatListener.java
+<<<<<<< Updated upstream
+=======
+C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Listeners\ConsoleListener.java
+>>>>>>> Stashed changes
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Listeners\DiscordListener.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\BridgeConfig.java
 C:\Users\luukk\Documents\Linker\src\main\java\me\ohfoxzyy\linker\Managers\DiscordBotManager.java

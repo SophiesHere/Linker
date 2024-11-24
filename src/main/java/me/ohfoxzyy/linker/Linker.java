@@ -2,15 +2,24 @@ package me.ohfoxzyy.linker;
 
 import me.ohfoxzyy.linker.Commands.LinkCommand;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import me.ohfoxzyy.linker.Managers.MessageManager;
 =======
 import me.ohfoxzyy.linker.Commands.LinkerCommand;
 import me.ohfoxzyy.linker.Listeners.ChatListener;
+=======
+import me.ohfoxzyy.linker.Commands.LinkerCommand;
+import me.ohfoxzyy.linker.Listeners.ChatListener;
+import me.ohfoxzyy.linker.Listeners.ConsoleListener;
+>>>>>>> Stashed changes
 import me.ohfoxzyy.linker.Listeners.DiscordListener;
 import me.ohfoxzyy.linker.Managers.BridgeConfig;
 import me.ohfoxzyy.linker.Managers.DiscordBotManager;
 import me.ohfoxzyy.linker.Managers.MessageManager;
 import me.ohfoxzyy.linker.Managers.Metrics;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import me.ohfoxzyy.linker.Tabcompletor.LinkerTab;
 import me.ohfoxzyy.linker.Managers.Metrics;
@@ -27,12 +36,20 @@ public final class Linker extends JavaPlugin {
     private DiscordBotManager discordBotManager;
     private LinkCommand linkCommand;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
     private Map<String, BridgeConfig> channels;
     private ChatListener chatListener;
 >>>>>>> Stashed changes
 
     private static Linker instance;
+=======
+    private Map<String, BridgeConfig> channels;
+    private ChatListener chatListener;
+    private ConsoleListener consoleListener;
+
+    private static volatile Linker instance;
+>>>>>>> Stashed changes
 
     @Override
     public void onEnable() {
@@ -53,20 +70,32 @@ public final class Linker extends JavaPlugin {
         getLogger().info("Enabling Commands");
         linkCommand = new LinkCommand(discordBotManager);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         LinkerCommand linkerCommand = new LinkerCommand(this, discordBotManager, linkCommand);
         getCommand("link").setExecutor(linkCommand);
         getCommand("linker").setExecutor(linkerCommand);
 =======
+=======
+>>>>>>> Stashed changes
         LinkerCommand linkerCommand = new LinkerCommand(this, discordBotManager, linkCommand, chatListener);
         getCommand("link").setExecutor(linkCommand);
         getCommand("linker").setExecutor(linkerCommand);
         getCommand("linker").setTabCompleter(new LinkerTab());
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         getLogger().info("Enabled Commands");
 
         getLogger().info("Enabling Listeners");
         chatListener = new ChatListener(discordBotManager, this);
+<<<<<<< Updated upstream
         getServer().getPluginManager().registerEvents(chatListener, this);
+=======
+        consoleListener = new ConsoleListener(discordBotManager, this);
+        getServer().getPluginManager().registerEvents(chatListener, this);
+        getServer().getPluginManager().registerEvents(consoleListener, this);
+>>>>>>> Stashed changes
         getServer().getPluginManager().registerEvents(new DiscordListener(discordBotManager.getBridgeChannels()), this);
         getLogger().info("Enabled Listeners");
 
@@ -94,10 +123,16 @@ public final class Linker extends JavaPlugin {
         return instance;
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 
     private static final String GITHUB_API_URL = "https://api.github.com/repos/SophiesHere/Linker/releases/latest";
     private static final String CURRENT_VERSION = "v1.2.1";
+=======
+
+    private static final String GITHUB_API_URL = "https://api.github.com/repos/SophiesHere/Linker/releases/latest";
+    private static final String CURRENT_VERSION = "v1.2.2";
+>>>>>>> Stashed changes
 
     public void checkForUpdate() {
         new Thread(() -> {
@@ -139,5 +174,8 @@ public final class Linker extends JavaPlugin {
     private boolean isNewVersionAvailable(String latestVersion, String currentVersion) {
         return latestVersion.compareTo(currentVersion) > 0;
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

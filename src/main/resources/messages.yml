@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Messages related to linking a player's account in minecraft
+=======
+# Messages related to linking a player's account in Minecraft
+>>>>>>> Stashed changes
 =======
 # Messages related to linking a player's account in Minecraft
 >>>>>>> Stashed changes
@@ -15,6 +19,7 @@ minecraft:
   only-player: "&cThis command can only be executed by players."
 
   # Upon reload
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   reload: "&aReloaded config, all messages and discord bot has restarted!"
 
@@ -67,4 +72,45 @@ discord:
 
   # When a bridge is loaded successfully
   bridge-loaded: "&aBridge '{bridge}' loaded successfully with Channel ID: {channelId}."
+>>>>>>> Stashed changes
+=======
+  reload: "&aReloaded config, all messages, and Discord bot has restarted!"
+
+# Messages related to linking a player's account in Discord, and bridges
+discord:
+  # When the account has been successfully linked
+  link-success: "Your Minecraft account has been successfully linked!"
+
+  # When the account has been unsuccessfully linked
+  link-failure: "Invalid or expired code. Please try again."
+
+  # When the Discord bot receives the code from a player.
+  link-received: "Received /link command with code: {code} from user: {user}."
+
+  # When the link code is invalid.
+  link-invalid: "Failed to link account: Invalid or expired code provided."
+
+  # When the code is successfully generated.
+  code-generated: "Generated link code: {code} for player UUID: {uuid}."
+
+  # When the account is successfully linked
+  account-saved: "Saved linked account: {discordId} for player UUID: {uuid}."
+
+  # When the bot is disabled
+  bot-shutdown: "Discord bot has been shut down."
+
+  # When the bot has not been successfully initialized
+  loading-error: "Error initializing Discord bot."
+
+  # When the Discord bot token is missing
+  token-missing: "Discord bot token not found. Disabling the bot."
+
+  # When a bridge channel ID is missing
+  channel-id-missing: "Channel ID not found for bridge: {bridge}. Disabling the bridge."
+
+  # When a bridge channel ID is invalid
+  channel-id-invalid: "Channel ID {channelId} not found. Disabling the bridge: {bridge}."
+
+  # When a bridge is loaded successfully
+  bridge-loaded: "Bridge '{bridge}' loaded successfully with Channel ID: {channelId}."
 >>>>>>> Stashed changes

@@ -1,10 +1,17 @@
+# V1.2.2 - Console parts aren't functional yet.
+# For bugs, please report them at our github or spigot page.
+# Thanks for using our plugin.
+
 config:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   # The token must be added, otherwise it WON'T work. Create one here.
   # https://discord.com/developers/applications
   # Also make sure that your discord bot has the right permissions and intents enabled.
   token: 'YOUR_DISCORD_BOT_TOKEN_HERE'
 =======
+=======
+>>>>>>> Stashed changes
   # The Discord bot token is required for the plugin to function.
   # Create a bot application here: https://discord.com/developers/applications
   # After creating the bot, copy the token and paste it below.
@@ -23,6 +30,10 @@ bridge:
   chat1:
     # Discord channel ID for this chat bridge. Replace with the actual channel ID from Discord.
     channel-id: '123456789012345678'  # Example ID; replace with your own.
+<<<<<<< Updated upstream
+=======
+    console-channel: true  # Enable console logs for this channel.
+>>>>>>> Stashed changes
 
     # Discord role name required to send messages to Minecraft from this Discord channel.
     # If left empty, all users in the Discord channel can send messages to Minecraft.
@@ -44,6 +55,10 @@ bridge:
   chat2:
     # A second chat bridge. Adjust settings as needed.
     channel-id: '234567890123456789'  # Replace with the actual channel ID.
+<<<<<<< Updated upstream
+=======
+    console-channel: false
+>>>>>>> Stashed changes
     discord-role: 'Admin'  # Only users with the "Admin" role can send messages from Discord.
     minecraft-permission: 'chatbridge.admin'  # Only players with this permission can send messages to Discord.
     prefix:
@@ -54,9 +69,20 @@ bridge:
     # A third chat bridge with no role or permission restrictions.
     # Use this for public chats or general communication channels.
     channel-id: '345678901234567890'  # Replace with the actual channel ID.
+<<<<<<< Updated upstream
+=======
+    console-channel: false
+>>>>>>> Stashed changes
     discord-role: ''  # No role restriction; all Discord users can send messages.
     minecraft-permission: ''  # No permission restriction; all players can send messages.
     prefix:
       minecraft: '**{name}**: *{message}*'  # Example format for Minecraft to Discord messages.
       discord: '&b&l{name}:&f {message}'  # Example format for Discord to Minecraft messages.
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
+console:
+  # Configure console output behavior for Discord.
+  max-lines: -1  # Set to -1 for infinite lines, or a positive number to limit the number of lines displayed.
 >>>>>>> Stashed changes
